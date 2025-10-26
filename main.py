@@ -1,5 +1,5 @@
 import zipfile
-import sys
+import sys, os
 
 
 class App:
@@ -12,8 +12,13 @@ class App:
 
     def main(self):
         self.dump_docx_content()
+        self.extract_docx_content("extracted")
 
     def __prepare(self):
+        if not zipfile.is_zipfile(self.path) and self.path.split(".")[-1] != "docx":
+            print("Target file is not a docx file", file=sys.stderr)
+            sys.exit(1)
+            
         try:
             self.docx_file = open(self.path, "rb")
         except OSError as e:
@@ -21,6 +26,9 @@ class App:
             sys.exit(1)
 
         self.zip_obj = zipfile.ZipFile(self.docx_file)
+
+    def extract_docx_content(self, dirname):
+        self.zip_obj.extractall(os.path.join(os.getcwd(), dirname))
 
     def dump_docx_content(self):
         name_list = self.zip_obj.namelist()
