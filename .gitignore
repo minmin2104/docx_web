@@ -1,0 +1,4 @@
+__pycache__/
+
+# Ignore test extracted folder
+extracted/
