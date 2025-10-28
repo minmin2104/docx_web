@@ -20,6 +20,9 @@ class Docx:
             
         self.zip_obj = zipfile.ZipFile(self.docx_file)
 
+    def get_document_file(self):
+        return self.zip_obj.open("word/document.xml")
+
     def extract_docx_content(self, dirname):
         self.zip_obj.extractall(os.path.join(os.getcwd(), dirname))
 

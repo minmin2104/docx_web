@@ -18,6 +18,9 @@ class App:
 
     def main(self):
         self.docx.dump_docx_content()
+        doc_xml = self.docx.get_document_file()
+        print(doc_xml.read())
+        doc_xml.close()
 
     def __clean_up(self):
         self.docx.clean_up()
