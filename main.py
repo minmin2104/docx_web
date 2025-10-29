@@ -1,3 +1,4 @@
+from docx_html_parser import DocHtmlParser
 from docx import Docx
 import sys
 
@@ -17,10 +18,11 @@ class App:
         self.__clean_up()
 
     def main(self):
-        self.docx.dump_docx_content()
-        doc_xml = self.docx.get_document_file()
-        print(doc_xml.read())
-        doc_xml.close()
+        self.docx.extract_docx_content("extracted")
+        # self.docx.dump_docx_content()
+        f_doc_xml = self.docx.get_document_file()
+        doc_html_parser = DocHtmlParser(f_doc_xml)
+        f_doc_xml.close()
 
     def __clean_up(self):
         self.docx.clean_up()
