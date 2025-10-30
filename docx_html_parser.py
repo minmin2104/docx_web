@@ -19,21 +19,20 @@ class DocHtmlContentHandler(sax.handler.ContentHandler):
     def startElement(self, name, attr):
         print(name)
 
+    def characters(self, content):
+        self.curr_data += content
+
     def endElement(self, name):
         if self.curr_data:
             print(f"{self.curr_data}")
         print(f"/{name}")
         self.curr_data = ""
 
-    def characters(self, content):
-        self.curr_data += content
-
     def endDocument(self):
         self.content += """
         </div>
         </body>
         """
-
 
 
 class DocHtmlParser:
