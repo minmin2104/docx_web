@@ -6,7 +6,7 @@ class DocHtmlContentHandler(sax.handler.ContentHandler):
     def __init__(self):
         self.curr_data = ""
         self.content = ""
-    
+
     def get_content(self):
         return self.content
 

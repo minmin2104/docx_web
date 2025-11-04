@@ -10,14 +10,15 @@ class Docx:
         self.__prepare()
 
     def __prepare(self):
-        if not zipfile.is_zipfile(self.path) and self.path.split(".")[-1] != "docx":
+        if not zipfile.is_zipfile(self.path) \
+                and self.path.split(".")[-1] != "docx":
             raise Exception("File must be .docx file")
-            
+
         try:
             self.docx_file = open(self.path, "rb")
         except OSError as e:
             raise OSError(e)
-            
+
         self.zip_obj = zipfile.ZipFile(self.docx_file)
 
     def get_document_file(self):
@@ -33,4 +34,3 @@ class Docx:
 
     def clean_up(self):
         self.docx_file.close()
-
